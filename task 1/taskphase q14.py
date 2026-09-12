@@ -1,12 +1,18 @@
 def first_repeating_element(arr):
-    seen = set()
-    first_repeating = -1
-    for i in range(len(arr) - 1, -1, -1):
-        if arr[i] in seen:
-            first_repeating = arr[i]
+    first_seen_at = {}
+    min_index = len(arr)
+    for i in range(len(arr)):
+        element = arr[i]
+        if element in first_seen_at:
+            original_index = first_seen_at[element]
+            if original_index < min_index:
+                min_index = original_index
         else:
-            seen.add(arr[i])
-    return first_repeating
+            first_seen_at[element] = i
+    if min_index < len(arr):
+        return arr[min_index]
+    else:
+        return -1
 user_input = input("Enter numbers separated by spaces: ")
 arr = [int(x) for x in user_input.split()]
 result = first_repeating_element(arr)
