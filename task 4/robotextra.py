@@ -74,8 +74,6 @@ class ContinuousRobotTracker:
         plt.axis("equal")
         plt.show()
 if __name__ == "__main__":
-  # --- Replace your old block with this new interactive block ---
-if __name__ == "__main__":
     robot = ContinuousRobotTracker(x=0.0, y=0.0, theta=0.0, dt=0.01)
     print("====================================================")
     print(" Continuous Unicycle Model Interactive Simulator ")
