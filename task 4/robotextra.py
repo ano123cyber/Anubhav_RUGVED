@@ -11,13 +11,13 @@ class ContinuousRobotTracker:
         self.dt = dt
         self.history = [(self.x, self.y, self.theta)]
 
-    def execute_velocity_command(self, v, omega, duration):
+    def execute_velocity_command(self, velocity, omega, duration):
         init_pos = f"({self.x:.2f}, {self.y:.2f}, {np.degrees(self.theta):.1f}°)"
-        print(f"Initial State: {init_pos} | Executing: v={v}, omega={omega}, duration={duration}s" )
+        print(f"Initial State: {init_pos} | Executing: v={velocity}, omega={omega}, duration={duration}s" )
         steps = int(duration / self.dt)
         for _ in range(steps):
-            self.x += v * np.cos(self.theta) * self.dt
-            self.y += v * np.sin(self.theta) * self.dt
+            self.x += velocity * np.cos(self.theta) * self.dt
+            self.y += velocity * np.sin(self.theta) * self.dt
             self.theta += omega * self.dt
             self.theta = (self.theta + np.pi) % (2 * np.pi) - np.pi
             self.history.append((self.x, self.y, self.theta))
@@ -100,8 +100,7 @@ if __name__ == "__main__":
                 print("Duration must be a positive number of seconds.")
                 continue
             robot.execute_velocity_command(
-                v=user_v, omega=user_omega, duration=user_duration
-            )
+                velocity=user_v, omega=user_omega, duration=user_duration)
 
         except ValueError:
             print(" Invalid Input! Enter three numbers separated by spaces: <v> <omega> <duration>")
